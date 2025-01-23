@@ -7,7 +7,7 @@ import {
 
 interface PTooltipProps {
     children: React.ReactNode;
-    label: string;
+    label?: string;
   }
  
 export function PTooltip({children, label}: PTooltipProps)  {

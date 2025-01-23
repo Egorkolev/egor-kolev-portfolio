@@ -20,7 +20,7 @@ export default function Home() {
                     </div>
                 </div>
             </main>
-            <section id="skills" className="border-b border-gray-500 xl:h-[100vh] 2xl:h-auto overflow-hidden">
+            <section id="skills" className="border-b border-gray-500 xl:h-[100vh] 2xl:h-auto">
                 <div className="md:py-6 py-6 flex flex-col md:gap-4 gap-4 max-w-5xl m-auto">
                     <h1 className="uppercase text-2xl md:text-3xl text-pinkShade [text-shadow:_2px_2px_2px_rgba(120,1,230,1)]
                         border border-gray-500 h-fit p-2 bg-zinc-900 rounded-lg w-fit m-auto md:m-0

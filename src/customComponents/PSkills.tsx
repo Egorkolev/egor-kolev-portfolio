@@ -20,7 +20,7 @@ const stylingDesign: TechnologyType[] = [
     { name: "Tailwind CSS" },
     { name: "Bootstrap" },
     { name: "Material UI" },
-    { name: "shadcn/ui" },
+    { name: "Shadcn/ui" },
 ];
 const backend: TechnologyType[] = [
     { name: "PostgreSQL" },
@@ -38,12 +38,12 @@ const other: TechnologyType[] = [
     { name: "Responsive Design" },
 ];
 const boxStyle = `
-    p-5 border border-pinkShade 
+    p-3 border border-pinkShade 
     bg-pinkShade bg-opacity-5 
     flex-1 gap-2 min-w-[290px]
     flex flex-col
 `
-const title = `
+const titleStyle = `
     text-xl
 `
 const paragraph = `
@@ -54,69 +54,39 @@ const boxItem = `
     flex w-fit gap-2 flex-wrap
 `
 
+const TechnologySection = ({ title, technologies }: { title: string, technologies: TechnologyType[] }) => {
+    return (
+        <div data-aos="fade-up" className={boxStyle}>
+            <h2 className={titleStyle}>{title}</h2>
+            <div className={boxItem}>
+                {technologies.map((item) => {
+                    return (
+                        <p className={paragraph} key={item.name}>{item.name}</p>
+                    )
+                })}
+            </div>
+        </div>
+    )
+}
+
 export default function PSkills() {
 
-      useEffect(() => {
-        AOS.init({
-          duration: 800,
-          once: true,
-          offset: 120,
-          easing: 'ease-in-out',
-        })
-      }, []);
+    useEffect(() => {
+    AOS.init({
+        duration: 800,
+        once: true,
+        offset: 120,
+        easing: 'ease-in-out',
+    })
+    }, []);
 
   return (
     <div className='flex flex-wrap max-w-5xl m-auto'>
-        <div data-aos="fade-up" className={boxStyle}>
-            <h2 className={title}>Frontend Technologies:</h2>
-            <div className={boxItem}>
-                {frontendTechnologies.map((item) => {
-                    return (
-                        <p className={paragraph} key={item.name}>{item.name}</p>
-                    )
-                })}
-            </div>
-        </div>
-        <div data-aos="fade-up" className={boxStyle}>
-            <h2 className={title}>Styling & Design:</h2>
-            <div className={boxItem}>
-                {stylingDesign.map((item) => {
-                    return (
-                        <p className={paragraph} key={item.name}>{item.name}</p>
-                    )
-                })}
-            </div>
-        </div>
-        <div data-aos="fade-up" className={boxStyle}>
-            <h2 className={title}>Backend & Databases:</h2>
-            <div className={boxItem}>
-                {backend.map((item) => {
-                    return (
-                        <p className={paragraph} key={item.name}>{item.name}</p>
-                    )
-                })}
-            </div>
-        </div>
-        <div data-aos="fade-up" className={boxStyle}>
-            <h2 className={title}>Tools:</h2>
-            <div className={boxItem}>
-                {tools.map((item) => {
-                    return (
-                        <p className={paragraph} key={item.name}>{item.name}</p>
-                    )
-                })}
-            </div>
-        </div>
-        <div data-aos="fade-up" className={boxStyle}>
-            <h2 className={title}>Other:</h2>
-            <div className={boxItem}>
-                {other.map((item) => {
-                    return (
-                        <p className={paragraph} key={item.name}>{item.name}</p>
-                    )
-                })}
-            </div>
-        </div>
+        <TechnologySection title='Frontend Technologies:' technologies={frontendTechnologies} />
+        <TechnologySection title='Styling & Design:' technologies={stylingDesign} />
+        <TechnologySection title='Backend & Databases:' technologies={backend} />
+        <TechnologySection title='Tools:' technologies={tools} />
+        <TechnologySection title='Other:' technologies={other} />
     </div>
   )
 }

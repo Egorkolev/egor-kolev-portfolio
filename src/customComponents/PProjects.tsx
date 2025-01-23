@@ -4,7 +4,7 @@ import taskManager from '../../public/taskManager.png';
 import cryptoLottery from '../../public/cryptoLottery.png';
 import AOS from "aos";
 import 'aos/dist/aos.css';
-import Image from 'next/image';
+import Image, { StaticImageData } from 'next/image';
 import { PTooltip } from './PTooltip';
 
 interface TechnologyType {
@@ -40,7 +40,7 @@ const boxStyle = `
     flex-1 gap-2 min-w-[290px]
     flex flex-col
 `
-const title = `
+const titleStyle = `
     text-xl whitespace-nowrap
 `
 const paragraphTech = `
@@ -48,7 +48,7 @@ const paragraphTech = `
     border border-green flex-1
     whitespace-nowrap
 `
-const paragraph = `
+const paragraphStyle = `
     text-pretty
 `
 const boxItem = `
@@ -58,7 +58,7 @@ const cart = `
     flex flex-wrap-reverse 
     justify-between gap-4 
     items-end text-balance 
-    lg:text-left text-center
+    text-justify
 `
 const cartItem = `
     max-w-xl flex 
@@ -70,6 +70,51 @@ const imgStyle = `
     flex-1 hover:shadow-md m-auto lg:m-0
     hover:shadow-blueText cursor-pointer
 `
+
+const ProjectSection = ({ title, paragraph, tooltip, hrefLink, technologies, projImg }: {
+    title: string, 
+    paragraph: string, 
+    tooltip?: string,
+    hrefLink?: string,
+    technologies: TechnologyType[], 
+    projImg: StaticImageData }) => {
+    return (
+        <div data-aos="fade-up" className={boxStyle}>
+            <h2 className={titleStyle}>{title}</h2>
+            <div className={cart}>
+                <div className={cartItem}>     
+                    <p className={paragraphStyle}>
+                        {paragraph}
+                    </p>
+                    <div className={boxItem}>
+                        {technologies.map((item) => {
+                            return (
+                                <p className={paragraphTech} key={item.name}>{item.name}</p>
+                            )
+                        })}
+                    </div>
+                </div>
+                <a 
+                    className="m-auto lg:m-0"
+                    style={{borderRadius: "5px"}}
+                    href={hrefLink ? hrefLink : '#projects'} 
+                    target={hrefLink ?? "_blank"}
+                >
+                    <PTooltip label={tooltip}>
+                        <Image
+                            style={{borderRadius: "5px"}}
+                            data-aos="fade-up"
+                            className={imgStyle}
+                            src={projImg}
+                            alt="Picture project" 
+                            priority
+                        />
+                    </PTooltip>
+                </a>
+            </div>
+        </div>
+    )
+}
 
 export default function PProjects() {
 
@@ -93,68 +138,25 @@ export default function PProjects() {
                 backgroundSize: 'cover',
                 backgroundPosition: 'center'
          }}></span>
-        <div data-aos="fade-up" className={boxStyle}>
-            <h2 className={title}>Task Manager:</h2>
-            <div className={cart}>
-                <div className={cartItem}>     
-                    <p className={paragraph}>
-                        Task Manager - is a web application for task management, built using Next.js, React, TypeScript, and Prisma. 
-                        It allows users to create, edit, and organize tasks, filter them by dates, and manage users and access rights. 
-                        The project is developed with modern technologies and deployed on Vercel.
-                    </p>
-                    <div className={boxItem}>
-                        {taskManagerTech.map((item) => {
-                            return (
-                                <p className={paragraphTech} key={item.name}>{item.name}</p>
-                            )
-                        })}
-                    </div>
-                </div>
-                <a 
-                    className="m-auto lg:m-0"
-                    style={{borderRadius: "5px"}}
-                    href="https://semicolon-task-management.vercel.app/" 
-                    target='_blank'
-                >
-                    <PTooltip label='Visit website'>
-                        <Image
-                            style={{borderRadius: "5px"}}
-                            data-aos="fade-up"
-                            className={imgStyle}
-                            src={taskManager}
-                            alt="Picture project" 
-                        />
-                    </PTooltip>
-                </a>
-            </div>
-        </div>
-        <div data-aos="fade-up" className={boxStyle}>
-            <h2 className={title}>Crypto Lottery:</h2>
-            <div className={cart}>
-                <div className={cartItem}>     
-                    <p className={paragraph}>
-                        Crypto Lotteria - is an early-stage startup leveraging blockchain technology for innovative lottery solutions, 
-                        with a backend built in Rust and Web3.js. As a Frontend Developer, I am responsible for building and optimizing the user-facing interface using modern tools.
-                    </p>
-                    <div className={boxItem}>
-                        {cryptoLotteryTech.map((item) => {
-                            return (
-                                <p className={paragraphTech} key={item.name}>{item.name}</p>
-                            )
-                        })}
-                    </div>
-                </div>
-                <PTooltip label='The website is not live yet'>
-                    <Image
-                        style={{borderRadius: "5px"}}
-                        data-aos="fade-up"
-                        className={imgStyle}
-                        src={cryptoLottery}
-                        alt="Picture project" 
-                    />
-                </PTooltip>
-            </div>
-        </div>
+         <ProjectSection 
+            technologies={taskManagerTech} 
+            projImg={taskManager}
+            hrefLink='https://semicolon-task-management.vercel.app/'
+            title='Task Manager:'
+            tooltip='Visit website'
+            paragraph='Task Manager - is a web application for task management, built using Next.js, React, TypeScript, and Prisma. 
+            It allows users to create, edit, and organize tasks, filter them by dates, and manage users and access rights. 
+            The project is developed with modern technologies and deployed on Vercel.'
+        />
+         <ProjectSection 
+            technologies={cryptoLotteryTech} 
+            projImg={cryptoLottery}
+            hrefLink=''
+            title='Crypto Lottery:'
+            tooltip='The website is not live yet'
+            paragraph='Crypto Lotteria - is an early-stage startup leveraging blockchain technology for innovative lottery solutions, 
+            with a backend built in Rust and Web3.js. As a Frontend Developer, I am responsible for building and optimizing the user-facing interface using modern tools.'
+        />
     </div>
   )
 }

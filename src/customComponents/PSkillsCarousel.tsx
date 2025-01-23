@@ -32,6 +32,11 @@ interface TechnologyType {
     svg: StaticImageData;
 }
 
+interface CarouselSectionProps {
+    direction: "forward" | "backward" | undefined;
+    technologies: TechnologyType[];
+}
+
 const technologyT: TechnologyType[] = [
     { name: "HTML5", svg: HTML5 },
     { name: "CSS3", svg: CSS3 },
@@ -49,7 +54,7 @@ const technologyB: TechnologyType[] = [
     { name: "Tailwind CSS", svg: Tailwind },
     { name: "Bootstrap", svg: Bootstrap },
     { name: "MUI", svg: MUI },
-    { name: "shadcn/ui", svg: shadcn },
+    { name: "Shadcn/ui", svg: shadcn },
     { name: "PostgreSQL", svg: PostgreSQL },
     { name: "Prisma", svg: Prisma },
 ];
@@ -67,8 +72,52 @@ const paragraph = `
     whitespace-nowrap
 `
 const imgStyle = `
-    md:w-10 w-5
+    md:w-8 w-5
 `
+
+const CarouselSection = ({direction, technologies}: CarouselSectionProps) => {
+    return (
+        <Carousel
+            opts={{
+                align: "start",
+                loop: true,
+            }}
+            plugins={[
+                AutoScroll({
+                    speed: 0.5,
+                    stopOnInteraction: false,
+                    stopOnMouseEnter: true,
+                    direction: direction,
+                }),
+            ]}
+            className={carousel}
+        >
+            <CarouselContent>
+                {technologies.map((icon, index) => (
+                    <CarouselItem
+                        key={index}
+                        className={carouselItem}
+                    >
+                        <Card
+                            className={card}
+                            key={icon.name}
+                        >
+                            <Image
+                                className={imgStyle}
+                                width={50}
+                                height={50}
+                                src={icon.svg.src}
+                                alt={`${icon.name} icon`}
+                                priority
+                            />
+                            <p className={paragraph}>{icon.name}</p>
+                        </Card>
+                    </CarouselItem>
+                ))}
+            </CarouselContent>
+        </Carousel>
+    )
+}
 
 export default function PSkillsCarousel() {
 
@@ -92,83 +141,9 @@ export default function PSkillsCarousel() {
                 backgroundSize: 'cover',
                 backgroundPosition: 'center'
          }}></span>
-         <div  data-aos="fade-up" className="flex flex-col gap-4 relative">
-            <Carousel
-                opts={{
-                    align: "start",
-                    loop: true,
-                }}
-                plugins={[
-                    AutoScroll({
-                        speed: 0.5,
-                        stopOnInteraction: false,
-                        stopOnMouseEnter: true,
-                        direction: "backward",
-                    }),
-                ]}
-                className={carousel}
-            >
-                <CarouselContent>
-                    {technologyT.map((icon, index) => (
-                        <CarouselItem
-                            key={index}
-                            className={carouselItem}
-                        >
-                            <Card
-                                className={card}
-                                key={icon.name}
-                            >
-                                <Image
-                                className={imgStyle}
-                                width={60}
-                                height={60}
-                                src={icon.svg.src}
-                                alt={`${icon.name} icon`}
-                                />
-                                <p className={paragraph}>{icon.name}</p>
-                            </Card>
-                        </CarouselItem>
-                    ))}
-                </CarouselContent>
-            </Carousel>
-            <Carousel
-                opts={{
-                    align: "start",
-                    loop: true,
-                }}
-                plugins={[
-                    AutoScroll({
-                        speed: 0.5,
-                        stopOnInteraction: false,
-                        stopOnMouseEnter: true,
-
-                    }),
-                ]}
-                className={carousel}
-            >
-                <CarouselContent>
-                    {technologyB.map((icon, index) => (
-                        <CarouselItem
-                            key={index}
-                            className={carouselItem}
-                        >
-                            <Card
-                                className={card}
-                                key={icon.name}
-                            >
-                                <Image
-                                className={imgStyle}
-                                width={60}
-                                height={60}
-                                src={icon.svg.src}
-                                alt={`${icon.name} icon`}
-                                />
-                                <p className={paragraph}>{icon.name}</p>
-                            </Card>
-                        </CarouselItem>
-                    ))}
-                </CarouselContent>
-            </Carousel>
+        <div  data-aos="fade-up" className="flex flex-col gap-2 relative">
+            <CarouselSection technologies={technologyT} direction="backward" />
+            <CarouselSection technologies={technologyB} direction="forward" />
         </div>
     </div>
   );
