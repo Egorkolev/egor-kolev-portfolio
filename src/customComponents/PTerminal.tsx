@@ -95,15 +95,15 @@ export default function PTerminal() {
               backgroundPosition: 'center'
           }}></span>
         <div data-aos="fade-left" className='border border-gray-500 rounded'>
-          <div className='bg-zinc-800 flex gap-2 items-center p-2 border-b-black border-b rounded rounded-b-lg'>
+          <div className='relative bg-zinc-800 flex gap-2 items-center p-2 border-b-black border-b rounded rounded-b-lg'>
               <ul className='flex gap-1 items-center'>
-              <li><IoIosCloseCircle className='text-red-500' /></li>
-              <li><HiMiniMinusCircle className='text-yellow-500' /></li>
-              <li><BiExpandAlt className='text-black bg-green rounded-full text-xs font-semibold p-0.5' /></li>
+                <li><IoIosCloseCircle className='text-red-500' /></li>
+                <li><HiMiniMinusCircle className='text-yellow-500' /></li>
+                <li><BiExpandAlt className='text-black bg-green rounded-full text-xs font-semibold p-0.5' /></li>
               </ul>
-              <ul className='flex gap-2 items-center m-auto'>
-              <li><FaFolderClosed className='text-blue-400' /></li>
-              <li className='text-gray-300 font-semibold'>Egor-Kolev</li>
+              <ul className='absolute left-1/2 transform -translate-x-1/2 flex gap-2 items-center m-auto'>
+                <li><FaFolderClosed className='text-blue-400' /></li>
+                <li className='text-gray-300 font-semibold'>Egor-Kolev</li>
               </ul>
           </div>
           <div className='p-2 bg-zinc-900 rounded rounded-t-lg'>

@@ -4,11 +4,13 @@ import { Button } from "@/components/ui/button"
 interface ButtonType {
     label?: string;
     children?: ReactNode;
+    className?: string;
 }
 
-export default function PButton({label, children}: ButtonType) {
+export default function PButton({label, children, className}: ButtonType) {
   return (
-    <Button className='
+    <Button className={`
+       ${className}
         animate-glow
         py-2
         px-4
@@ -23,7 +25,7 @@ export default function PButton({label, children}: ButtonType) {
         hover:shadow-pinkShade
         shadow-sm
         text-base
-    '>
+    `}>
         {label || children}
     </Button>
   )
