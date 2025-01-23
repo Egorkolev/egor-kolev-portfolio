@@ -14,7 +14,7 @@ export default function Home() {
                     <h1 className="uppercase text-2xl md:text-3xl text-pinkShade [text-shadow:_2px_2px_2px_rgba(120,1,230,1)]
                         border border-gray-500 h-fit p-2 bg-zinc-900 rounded- w-fit mx-auto md:m-0
                     ">About me</h1>
-                    <div className="flex justify-between md:gap-10 gap-4 items-start flex-wrap">
+                    <div className="flex justify-between md:gap-10 gap-2 items-start flex-wrap">
                         <PAvatar />
                         <PTerminal />
                     </div>

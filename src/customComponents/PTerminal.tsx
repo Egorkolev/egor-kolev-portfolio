@@ -84,7 +84,7 @@ export default function PTerminal() {
   }, [index]);
 
   return (
-    <div className='relative max-w-[600px] min-w-[290px] w-[100%] h-fit flex-1'>
+    <div className='relative max-w-[600px] min-w-[280px] w-[100%] h-fit flex-1'>
           <span className='absolute top-0 right-0 shadow-[0px_230px_360px_180px_rgba(120,1,230,0.1)] z-[-1] rounded-full'></span>
           <span className='absolute top-0 right-0 shadow-[0px_280px_360px_180px_rgba(0,120,230,0.3)] z-[-1] rounded-full'></span>
           <span className='absolute top-0 right-0 shadow-[0px_330px_360px_180px_rgba(120,1,230,0.2)] z-[-1] rounded-full'></span>

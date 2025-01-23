@@ -29,7 +29,7 @@ export default function PAvatar() {
         }}></span>
         <Image
             data-aos="fade-right"
-            className="lg:max-w-[450px] max-w-[300px] w-[100%] flex-1"
+            className="lg:max-w-[450px] max-w-[280px] w-[100%] flex-1"
             src={Avatar}
             alt="Picture of the author" 
         />

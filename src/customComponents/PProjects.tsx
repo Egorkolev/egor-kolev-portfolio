@@ -119,7 +119,7 @@ export default function PProjects() {
                     <PTooltip label='Visit website'>
                         <Image
                             style={{borderRadius: "5px"}}
-                            data-aos="fade-left"
+                            data-aos="fade-up"
                             className={imgStyle}
                             src={taskManager}
                             alt="Picture project" 
@@ -147,7 +147,7 @@ export default function PProjects() {
                 <PTooltip label='The website is not live yet'>
                     <Image
                         style={{borderRadius: "5px"}}
-                        data-aos="fade-left"
+                        data-aos="fade-up"
                         className={imgStyle}
                         src={cryptoLottery}
                         alt="Picture project" 
