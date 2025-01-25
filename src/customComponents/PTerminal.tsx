@@ -36,7 +36,7 @@ export default function PTerminal() {
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
-    ctx.font = '18px "Courier New", Courier, monospace';
+    ctx.font = 'bold 20px "Courier New", Courier, monospace';
     ctx.fillStyle = '#32CD32';
     ctx.textBaseline = 'top';
     ctx.lineWidth = 2;
