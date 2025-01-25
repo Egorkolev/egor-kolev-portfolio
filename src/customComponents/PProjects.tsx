@@ -100,7 +100,7 @@ const ProjectSection = ({ title, paragraph, tooltip, hrefLink, technologies, pro
                     className='w-fiy h-full m-auto lg:m-0 flex-1 p-0 m-0'>
                     <a
                         style={{borderRadius: "5px"}}
-                        href={'#projects'} 
+                        href={hrefLink} 
                         target={"_blank"}
                     >
                         <PTooltip label={tooltip}>
