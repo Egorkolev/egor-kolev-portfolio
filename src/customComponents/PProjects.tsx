@@ -97,7 +97,7 @@ const ProjectSection = ({ title, paragraph, tooltip, hrefLink, technologies, pro
                 </div>
                 <Button 
                     disabled={!hrefLink?.length}
-                    className='w-fiy h-full m-auto lg:m-0 flex-1 p-0 m-0'>
+                    className='w-fiy h-full m-auto lg:m-0 flex-1 p-0'>
                     <a
                         style={{borderRadius: "5px"}}
                         href={hrefLink} 
