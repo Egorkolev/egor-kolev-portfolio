@@ -15,7 +15,7 @@ export function PTooltip({children, label}: PTooltipProps)  {
     <TooltipProvider>
         <Tooltip>
             <TooltipTrigger asChild>
-            {children}
+                {children}
             </TooltipTrigger>
             <TooltipContent>
             <p className="text-blueText text-sm [text-shadow:_2px_2px_2px_rgba(120,1,230,1)]

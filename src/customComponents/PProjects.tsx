@@ -6,6 +6,7 @@ import AOS from "aos";
 import 'aos/dist/aos.css';
 import Image, { StaticImageData } from 'next/image';
 import { PTooltip } from './PTooltip';
+import { Button } from '@/components/ui/button';
 
 interface TechnologyType {
     name: string;
@@ -66,7 +67,7 @@ const cartItem = `
     m-auto lg:m-0
 `
 const imgStyle = `
-    max-w-[400px] w-[100%] 
+    max-w-[400px] min-w-[264px] w-[100%]
     flex-1 hover:shadow-md m-auto lg:m-0
     hover:shadow-blueText cursor-pointer
 `
@@ -94,23 +95,27 @@ const ProjectSection = ({ title, paragraph, tooltip, hrefLink, technologies, pro
                         })}
                     </div>
                 </div>
-                <a 
-                    className="m-auto lg:m-0"
-                    style={{borderRadius: "5px"}}
-                    href={hrefLink ? hrefLink : '#projects'} 
-                    target={hrefLink ?? "_blank"}
-                >
-                    <PTooltip label={tooltip}>
-                        <Image
-                            style={{borderRadius: "5px"}}
-                            data-aos="fade-up"
-                            className={imgStyle}
-                            src={projImg}
-                            alt="Picture project" 
-                            priority
-                        />
-                    </PTooltip>
-                </a>
+                <Button 
+                    disabled={!hrefLink?.length}
+                    className='w-fiy h-full m-auto lg:m-0 flex-1 p-0 m-0'>
+                    <a
+                        style={{borderRadius: "5px"}}
+                        href={'#projects'} 
+                        target={"_blank"}
+                    >
+                        <PTooltip label={tooltip}>
+                            <Image
+                                style={{borderRadius: "5px"}}
+                                data-aos="fade-up"
+                                className={imgStyle}
+                                src={projImg}
+                                alt="Picture project" 
+                                priority
+                            />
+                        </PTooltip>
+                    </a>
+                </Button>
+
             </div>
         </div>
     )
