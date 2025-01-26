@@ -66,7 +66,8 @@ const carouselItem = `
     basis-1/2.5 sm:basis-1/4 md:basis-1/3 lg:basis-1/5 xl:basis-11/1 py-2
 `
 const card = `
-    border border-gray-500 w-max h-fit p-2 bg-zinc-900 rounded-lg flex md:gap-4 gap-2 md:text-lg text-sm animate-glow
+    border border-gray-500 w-max h-fit p-2 dark:bg-zinc-900 rounded-lg bg-pink
+    bg-opacity-20 flex md:gap-4 gap-2 md:text-lg text-sm animate-glow
 `
 const paragraph = `
     whitespace-nowrap

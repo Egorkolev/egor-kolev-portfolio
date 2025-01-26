@@ -48,7 +48,8 @@ const titleStyle = `
 `
 const paragraph = `
     text:base md:text-lg px-5 py-1 
-    border border-green
+    border border-green bg-pink
+    bg-opacity-20 dark:bg-opacity-5 
 `
 const boxItem = `
     flex w-fit gap-2 flex-wrap

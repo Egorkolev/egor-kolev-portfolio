@@ -47,7 +47,8 @@ const titleStyle = `
 const paragraphTech = `
     text-sm md:text-base px-2 
     border border-green flex-1
-    whitespace-nowrap
+    whitespace-nowrap bg-pink
+    bg-opacity-20 dark:bg-opacity-5
 `
 const paragraphStyle = `
     text-pretty
@@ -95,15 +96,16 @@ const ProjectSection = ({ title, paragraph, tooltip, hrefLink, technologies, pro
                         })}
                     </div>
                 </div>
-                <Button 
-                    disabled={!hrefLink?.length}
-                    className='w-fiy h-full m-auto lg:m-0 flex-1 p-0'>
-                    <a
-                        style={{borderRadius: "5px"}}
-                        href={hrefLink} 
-                        target={"_blank"}
-                    >
-                        <PTooltip label={tooltip}>
+                <PTooltip label={tooltip}>
+                    <Button 
+                        disabled={!hrefLink?.length}
+                        className='w-fiy h-full m-auto lg:m-0 flex-1 p-0'>
+                        <a  
+                            rel="preload"
+                            style={{borderRadius: "5px"}}
+                            href={hrefLink} 
+                            target={"_blank"}
+                        > 
                             <Image
                                 style={{borderRadius: "5px"}}
                                 data-aos="fade-up"
@@ -112,10 +114,9 @@ const ProjectSection = ({ title, paragraph, tooltip, hrefLink, technologies, pro
                                 alt="Picture project" 
                                 priority
                             />
-                        </PTooltip>
-                    </a>
-                </Button>
-
+                        </a>
+                    </Button>
+                </PTooltip>
             </div>
         </div>
     )
