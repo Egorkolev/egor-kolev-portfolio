@@ -4,12 +4,14 @@ import PArrowScroll from "@/customComponents/PArrowScroll";
 import PNavigation from "@/customComponents/PNavigation";
 import PProjects from "@/customComponents/PProjects";
 import PTerminal from "@/customComponents/PTerminal";
+import { Analytics } from "@vercel/analytics/react";
 import PAvatar from "@/customComponents/PAvatar";
 import PSkills from "@/customComponents/PSkills";
 
 export default function Home() {
     return (
         <>
+            <Analytics />
             <header className="px-4"><PNavigation /></header>
             <main className="border-b border-gray-500 xl:h-[94vh] 2xl:h-auto">
                 <div className="relative md:py-18 py-12 flex flex-col md:gap-16 gap-4 max-w-5xl m-auto px-4">
