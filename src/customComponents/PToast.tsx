@@ -2,10 +2,8 @@
 import { useEffect } from "react";
 import { toast } from "sonner";
 
-
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const PToast = ({response, trigger}: any) => {
-  console.log(response, "response");
   
   useEffect(() => {
     if (trigger) {
@@ -22,7 +20,7 @@ const PToast = ({response, trigger}: any) => {
         response?.message || response?.error || "Something happened";
 
       toast(messageType, {
-        className: `${toastStyle} max-w-[300px] m-auto md:max-w-full md:m-0`,
+        className: `${toastStyle} w-[-webkit-fill-available] max-w-full`,
         description: messageContent,
       });
     }

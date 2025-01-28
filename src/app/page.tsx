@@ -16,7 +16,7 @@ export default function Home() {
     return (
         <>
             <Analytics />
-            <Toaster position="top-center" />
+            <Toaster className="w-[-webkit-fill-available] max-w-full" position="top-center" />
             <header className="px-4"><PNavigation /></header>
             <main className="border-b border-gray-500 xl:h-[94vh] 2xl:h-auto">
                 <div className="relative md:py-18 py-12 flex flex-col md:gap-16 gap-4 max-w-5xl m-auto px-4">
