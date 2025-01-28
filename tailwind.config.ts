@@ -1,5 +1,6 @@
 import type { Config } from "tailwindcss";
 import tailwindcssAnimate from "tailwindcss-animate";
+import { PluginAPI } from "tailwindcss/types/config";
 
 export default {
     darkMode: ["class"],
@@ -21,6 +22,9 @@ export default {
 		"3xl": "1600px"
 	},
   	extend: {
+		backgroundColor: {
+			'autofill': '#FF1493',
+		},
 		animation: {
 			typing: "typing 3s steps(50, end), blink 0.5s step-end infinite",
 			blink: 'blink 0.5s step-end infinite',
@@ -105,5 +109,14 @@ export default {
   		}
   	}
   },
-  plugins: [tailwindcssAnimate],
+  plugins: [
+	tailwindcssAnimate,
+	function ({addComponents}: PluginAPI) {
+		addComponents({
+			'input:-webkit-autofill': {
+				backgroundColor: '#FF1493 !important'
+			}
+		})
+	},
+],
 } satisfies Config;

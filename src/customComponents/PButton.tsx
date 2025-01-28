@@ -1,16 +1,24 @@
-import React, { ReactNode } from 'react'
-import { Button } from "@/components/ui/button"
+import React, { ReactNode } from "react";
+import { Button } from "@/components/ui/button";
 
 interface ButtonType {
-    label?: string;
-    children?: ReactNode;
-    className?: string;
+  label?: string;
+  children?: ReactNode;
+  className?: string;
+  type?: "submit" | "reset" | "button" | undefined;
 }
 
-export default function PButton({label, children, className}: ButtonType) {
+export default function PButton({
+  label,
+  children,
+  className,
+  type,
+}: ButtonType) {
   return (
-    <Button className={`
-       ${className}
+    <Button
+      type={type}
+      className={`
+        ${className}
         animate-glow
         py-2 px-4
         uppercase
@@ -27,8 +35,9 @@ export default function PButton({label, children, className}: ButtonType) {
         shadow-sm
         text-base
         font-bold dark:font-normal
-    `}>
-        {label || children}
+    `}
+    >
+      {label || children}
     </Button>
-  )
+  );
 }

@@ -1,26 +1,39 @@
 "use client";
-import { useTheme } from "@/context/ThemeContext";
 import { Button } from "@/components/ui/button";
 import { MdDarkMode } from "react-icons/md";
 import { MdLightMode } from "react-icons/md";
 import { useEffect, useState } from "react";
 
 const ThemeToggle = () => {
-    const {theme, toggleTheme} = useTheme();
     const [storageTheme, setStorageTheme] = useState<string | null>(null);
 
+    const [theme, setTheme] = useState(() => {
+        if(typeof window !== 'undefined') {
+            return localStorage.getItem('theme') || 'light';
+        }
+        return 'light';
+    })
+
+    const toggleTheme = () => {
+        const newTheme = theme === 'light' ? 'dark' : 'light';
+        setTheme(newTheme);
+        localStorage.setItem('theme', newTheme);
+        document.documentElement.classList.toggle('dark', newTheme === 'dark');
+    }
+
     useEffect(() => {
+        document.documentElement.classList.toggle('dark', theme === 'dark');
+
         if(typeof window !== "undefined") {
             const savedTheme = localStorage.getItem("theme");
             setStorageTheme(savedTheme);
         }
-    }, []);
 
-    useEffect(() => {
         if(theme) {
             localStorage.setItem("theme", theme)
         }
-    }, [theme]);
+
+    }, [theme])
 
     const currentTheme = storageTheme && theme;
     
