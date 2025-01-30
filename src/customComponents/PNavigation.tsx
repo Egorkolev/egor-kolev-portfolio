@@ -17,11 +17,11 @@ export default function PNavigation() {
             <Link className={linkStyle} href="#skills">
                 <PButton className={buttonStyle} label='Skills' />
             </Link>
-            <Link className={linkStyle} href="#projects">
-                <PButton className={buttonStyle} label='Projects' />
-            </Link>
             <Link className={linkStyle} href="#experience">
                 <PButton className={buttonStyle} label='Experience' />
+            </Link>
+            <Link className={linkStyle} href="#projects">
+                <PButton className={buttonStyle} label='Projects' />
             </Link>
             <Link className={linkStyle} href="#contact">
                 <PButton className={buttonStyle} label='Contact' />

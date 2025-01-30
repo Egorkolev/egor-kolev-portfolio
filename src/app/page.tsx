@@ -36,18 +36,18 @@ export default function Home() {
                 </div>
                 <PSkillsCarousel />
             </section>
-            <section id="projects" className="border-b border-gray-500 xl:h-[100vh] 2xl:h-auto">
-                <div className={subSection}>
-                    <h1 className={mainCaption}>Projects</h1>
-                    <h2 className={subCaption}>The Projects I am currently working on:</h2>
-                    <PProjects />
-                </div>
-            </section>
             <section id="experience" className="border-b border-gray-500 xl:h-[100vh] 2xl:h-auto">
                 <div className={subSection}>
                     <h1 className={mainCaption}>Experience</h1>
                     <h2 className={subCaption}>Experience in product companies and startups:</h2>
                     <PExperience />
+                </div>
+            </section>
+            <section id="projects" className="border-b border-gray-500 xl:h-[100vh] 2xl:h-auto">
+                <div className={subSection}>
+                    <h1 className={mainCaption}>Projects</h1>
+                    <h2 className={subCaption}>The Projects I am currently working on:</h2>
+                    <PProjects />
                 </div>
             </section>
             <footer id="contact" className="xl:h-[100vh] 2xl:h-auto">
