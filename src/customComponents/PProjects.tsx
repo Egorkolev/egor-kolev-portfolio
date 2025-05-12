@@ -1,13 +1,21 @@
 "use client";
-import React, { useEffect } from 'react';
-import taskManager from '../../public/taskManager.png';
-import cryptoLottery from '../../public/cryptoLottery.png';
-import AOS from "aos";
-import 'aos/dist/aos.css';
+import cryptoLottery2 from '../../public/crypto/crypto2.png';
+import cryptoLottery3 from '../../public/crypto/crypto3.png';
+import cryptoLottery4 from '../../public/crypto/crypto4.png';
+import cryptoLottery5 from '../../public/crypto/crypto5.png';
+import cryptoLottery from '../../public/crypto/crypto1.png';
+import taskManager2 from '../../public/task/task1.png';
+import taskManager3 from '../../public/task/task3.png';
+import taskManager4 from '../../public/task/task4.png';
+import taskManager5 from '../../public/task/task5.png';
+import taskManager from '../../public/task/task2.png';
 import Image, { StaticImageData } from 'next/image';
-import { PTooltip } from './PTooltip';
+import React, { useEffect, useState } from 'react';
 import { Button } from '@/components/ui/button';
-
+import { PTooltip } from './PTooltip';
+import PDialog from './PDialog';
+import 'aos/dist/aos.css';
+import AOS from "aos";
 interface TechnologyType {
     name: string;
 }
@@ -34,7 +42,20 @@ const cryptoLotteryTech: TechnologyType[] = [
     { name: "Prisma (ORM)" },
     { name: "Vercel" },
 ];
-
+const cryptoImages = [
+    cryptoLottery,
+    cryptoLottery2,
+    cryptoLottery3,
+    cryptoLottery4,
+    cryptoLottery5,
+];
+const taskImages = [
+    taskManager,
+    taskManager2,
+    taskManager3,
+    taskManager4,
+    taskManager5,
+];
 const boxStyle = `
     p-3 border border-pinkShade 
     bg-pinkShade bg-opacity-5 
@@ -73,13 +94,16 @@ const imgStyle = `
     hover:shadow-blueText cursor-pointer
 `
 
-const ProjectSection = ({ title, paragraph, tooltip, hrefLink, technologies, projImg }: {
+const ProjectSection = ({ title, paragraph, tooltip, hrefLink, technologies, projImg, imgGalery }: {
     title: string, 
     paragraph: string, 
     tooltip?: string,
     hrefLink?: string,
     technologies: TechnologyType[], 
+    imgGalery: StaticImageData[],
     projImg: StaticImageData }) => {
+    const [showDialog, setShowDialog] = useState<boolean>(false);
+
     return (
         <div data-aos="fade-up" className={boxStyle}>
             <h2 className={titleStyle}>{title}</h2>
@@ -98,25 +122,20 @@ const ProjectSection = ({ title, paragraph, tooltip, hrefLink, technologies, pro
                 </div>
                 <PTooltip label={tooltip}>
                     <Button 
-                        disabled={!hrefLink?.length}
-                        className='w-fiy h-full m-auto lg:m-0 flex-1 p-0'>
-                        <a  
-                            rel="preload"
+                        className='w-fit h-full m-auto lg:m-0 flex-1 p-0'
+                        onClick={() => setShowDialog(true)}
+                    >
+                        <Image
                             style={{borderRadius: "5px"}}
-                            href={hrefLink} 
-                            target={"_blank"}
-                        > 
-                            <Image
-                                style={{borderRadius: "5px"}}
-                                data-aos="fade-up"
-                                className={imgStyle}
-                                src={projImg}
-                                alt="Picture project" 
-                                priority
-                            />
-                        </a>
+                            data-aos="fade-up"
+                            className={imgStyle}
+                            src={projImg}
+                            alt="Picture project" 
+                            priority
+                        />
                     </Button>
                 </PTooltip>
+                <PDialog imgGalery={imgGalery} hrefLink={hrefLink} dialogSwitcher={showDialog} onChangeDialog={setShowDialog} />
             </div>
         </div>
     )
@@ -147,6 +166,7 @@ export default function PProjects() {
          <ProjectSection 
             technologies={taskManagerTech} 
             projImg={taskManager}
+            imgGalery={taskImages}
             hrefLink='https://semicolon-task-management.vercel.app/'
             title='Task Manager:'
             tooltip='Visit website'
@@ -157,6 +177,7 @@ export default function PProjects() {
          <ProjectSection 
             technologies={cryptoLotteryTech} 
             projImg={cryptoLottery}
+            imgGalery={cryptoImages}
             hrefLink=''
             title='Crypto Lottery:'
             tooltip='The website is not live yet'
