@@ -1,4 +1,10 @@
 "use client";
+import labAssist1 from '../../public/labAssist/labAssist1.png';
+import labAssist2 from '../../public/labAssist/labAssist2.png';
+import labAssist3 from '../../public/labAssist/labAssist3.png';
+import labAssist4 from '../../public/labAssist/labAssist4.png';
+import labAssist5 from '../../public/labAssist/labAssist5.png';
+import labAssist6 from '../../public/labAssist/labAssist6.png';
 import cryptoLottery2 from '../../public/crypto/crypto2.png';
 import cryptoLottery3 from '../../public/crypto/crypto3.png';
 import cryptoLottery4 from '../../public/crypto/crypto4.png';
@@ -42,6 +48,20 @@ const cryptoLotteryTech: TechnologyType[] = [
     { name: "Prisma (ORM)" },
     { name: "Vercel" },
 ];
+const labAssistTech: TechnologyType[] = [
+    { name: "JavaScript" },
+    { name: "TypeScript" },
+    { name: "React" },
+    { name: "Next.js" },
+    { name: "Node.js" },
+    { name: "Express" },
+    { name: "PostgreSQL" },
+    { name: "Prisma (ORM)" },
+    { name: "shadcn/ui" },
+    { name: "Tailwind CSS" },
+    { name: "Vercel" },
+    { name: "Railway" },
+];
 const cryptoImages = [
     cryptoLottery,
     cryptoLottery2,
@@ -55,6 +75,14 @@ const taskImages = [
     taskManager3,
     taskManager4,
     taskManager5,
+];
+const labAssistImages = [
+    labAssist1,
+    labAssist2,
+    labAssist3,
+    labAssist4,
+    labAssist5,
+    labAssist6,
 ];
 const boxStyle = `
     p-3 border border-pinkShade 
@@ -163,6 +191,27 @@ export default function PProjects() {
                 backgroundSize: 'cover',
                 backgroundPosition: 'center'
          }}></span>
+        <ProjectSection 
+            technologies={labAssistTech} 
+            projImg={labAssist1}
+            imgGalery={labAssistImages}
+            hrefLink='https://lab-rador-assist.vercel.app/'
+            title='Lab Assist:'
+            tooltip='Visit website'
+            paragraph='Lab Assist - is an early-stage project, comprehensive fullstack solution for laboratory process management and scientific research automation. 
+            The application includes experiment management systems, data analysis, and workflow digitization. As a Fullstack Developer, I am responsible for 
+            the complete development cycle - from server-side logic and database architecture to user interface implementation.'
+        />
+        <ProjectSection 
+            technologies={cryptoLotteryTech} 
+            projImg={cryptoLottery}
+            imgGalery={cryptoImages}
+            hrefLink=''
+            title='Crypto Lottery:'
+            tooltip='The website is not live yet'
+            paragraph='Crypto Lotteria - is an early-stage startup leveraging blockchain technology for innovative lottery solutions, 
+            with a backend built in Rust and Web3.js. As a Frontend Developer, I am responsible for building and optimizing the user-facing interface using modern tools.'
+        />
          <ProjectSection 
             technologies={taskManagerTech} 
             projImg={taskManager}
@@ -173,16 +222,6 @@ export default function PProjects() {
             paragraph='Task Manager - is a web application for task management, built using Next.js, React, TypeScript, and Prisma. 
             It allows users to create, edit, and organize tasks, filter them by dates, and manage users and access rights. 
             The project is developed with modern technologies and deployed on Vercel.'
-        />
-         <ProjectSection 
-            technologies={cryptoLotteryTech} 
-            projImg={cryptoLottery}
-            imgGalery={cryptoImages}
-            hrefLink=''
-            title='Crypto Lottery:'
-            tooltip='The website is not live yet'
-            paragraph='Crypto Lotteria - is an early-stage startup leveraging blockchain technology for innovative lottery solutions, 
-            with a backend built in Rust and Web3.js. As a Frontend Developer, I am responsible for building and optimizing the user-facing interface using modern tools.'
         />
     </div>
   )

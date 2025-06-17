@@ -23,6 +23,8 @@ const stylingDesign: TechnologyType[] = [
     { name: "Shadcn/ui" },
 ];
 const backend: TechnologyType[] = [
+    { name: "Node.js" },
+    { name: "Express" },
     { name: "PostgreSQL" },
     { name: "Prisma (ORM)" },
 ];
@@ -30,11 +32,15 @@ const tools: TechnologyType[] = [
     { name: "Git" },
     { name: "Figma" },
     { name: "Vercel" },
+    { name: "Railway" },
     { name: "Supabase" },
+    { name: "Postman" },
+    { name: "Insomnia" },
 ];
 const other: TechnologyType[] = [
-    { name: "Agile/Scrum" },
     { name: "REST APIs" },
+    { name: "NEXT APIs" },
+    { name: "Agile/Scrum" },
     { name: "Responsive Design" },
 ];
 const boxStyle = `
@@ -84,8 +90,8 @@ export default function PSkills() {
   return (
     <div className='flex flex-wrap max-w-5xl m-auto'>
         <TechnologySection title='Frontend Technologies:' technologies={frontendTechnologies} />
-        <TechnologySection title='Styling & Design:' technologies={stylingDesign} />
         <TechnologySection title='Backend & Databases:' technologies={backend} />
+        <TechnologySection title='Styling & Design:' technologies={stylingDesign} />
         <TechnologySection title='Tools:' technologies={tools} />
         <TechnologySection title='Other:' technologies={other} />
     </div>

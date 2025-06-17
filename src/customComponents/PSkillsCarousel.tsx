@@ -6,6 +6,7 @@ import JavaScript from "../../public/javascript.svg";
 import TypeScript from "../../public/typescript.svg";
 import Reactjs from "../../public/react.svg";
 import Next from "../../public/nextdotjs.svg";
+import Node from "../../public/nodedotjs.svg";
 import Redux from "../../public/redux.svg";
 import Git from "../../public/git.svg";
 import Figma from "../../public/figma.svg";
@@ -16,6 +17,8 @@ import MUI from "../../public/mui.svg";
 import shadcn from "../../public/shadcnui.svg";
 import PostgreSQL from "../../public/postgresql.svg";
 import Prisma from "../../public/prisma.svg";
+import Postman from "../../public/postman.svg";
+import Insomnia from "../../public/insomnia.svg";
 import { Card } from "@/components/ui/card";
 import {
     Carousel,
@@ -44,12 +47,15 @@ const technologyT: TechnologyType[] = [
     { name: "TypeScript", svg: TypeScript },
     { name: "React", svg: Reactjs },
     { name: "Next.js", svg: Next },
+    { name: "Node.js", svg: Node },
     { name: "Redux", svg: Redux },
     { name: "Git", svg: Git },
 ];
 
 const technologyB: TechnologyType[] = [
     { name: "Figma", svg: Figma },
+    { name: "Postman", svg: Postman },
+    { name: "Insomnia", svg: Insomnia },
     { name: "SASS", svg: SASS },
     { name: "Tailwind CSS", svg: Tailwind },
     { name: "Bootstrap", svg: Bootstrap },

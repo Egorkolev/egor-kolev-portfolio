@@ -57,7 +57,7 @@ export default function PDialog({dialogSwitcher, onChangeDialog, imgGalery, href
                 <CarouselNext className='z-20 bg-pinkShade' />
             </Carousel>
             <DialogFooter className='m-auto flex items-center flex-wrap'>
-                {hrefLink?.length === 0 && <h1 className='text-green text-lg'>This website in progress</h1>}
+                {hrefLink?.length === 0 && <h1 className='text-green text-lg'>This website is in progress</h1>}
                 <Button disabled={hrefLink?.length === 0} className='m-auto'>
                     <a
                         className='text-green text-lg flex items-center gap-2'

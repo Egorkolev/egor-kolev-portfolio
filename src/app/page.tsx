@@ -18,7 +18,7 @@ export default function Home() {
             <Analytics />
             <Toaster className="w-[-webkit-fill-available] max-w-full" position="top-center" />
             <header className="px-4"><PNavigation /></header>
-            <main className="border-b border-gray-500 xl:h-[94vh] 2xl:h-auto">
+            <main className="border-b border-gray-500 py-5 md:py-10">
                 <div className="relative md:py-18 py-12 flex flex-col md:gap-16 gap-4 max-w-5xl m-auto px-4">
                     <h1 className={mainCaption}>About me</h1>
                     <div className="relative flex justify-between md:gap-10 gap-2 items-start flex-wrap">
@@ -28,7 +28,7 @@ export default function Home() {
                     </div>
                 </div>
             </main>
-            <section id="skills" className="border-b border-gray-500 xl:h-[100vh] 2xl:h-auto pb-12 md:pb-0">
+            <section id="skills" className="border-b border-gray-500 py-5 md:py-10">
                 <div className={subSection}>
                     <h1 className={mainCaption}>Skills</h1>
                     <h2 className={subCaption}>The skills, tools and technology I use:</h2>
@@ -36,21 +36,21 @@ export default function Home() {
                 </div>
                 <PSkillsCarousel />
             </section>
-            <section id="experience" className="border-b border-gray-500 xl:h-[100vh] 2xl:h-auto">
+            <section id="experience" className="border-b border-gray-500 py-5 md:py-10">
                 <div className={subSection}>
                     <h1 className={mainCaption}>Experience</h1>
                     <h2 className={subCaption}>Experience in product companies and startups:</h2>
                     <PExperience />
                 </div>
             </section>
-            <section id="projects" className="border-b border-gray-500 xl:h-[100vh] 2xl:h-auto">
+            <section id="projects" className="border-b border-gray-500 py-5 md:py-10">
                 <div className={subSection}>
                     <h1 className={mainCaption}>Projects</h1>
                     <h2 className={subCaption}>The Projects I am currently working on:</h2>
                     <PProjects />
                 </div>
             </section>
-            <footer id="contact" className="xl:h-[100vh] 2xl:h-auto">
+            <footer id="contact" className="py-5 md:py-10">
                 <div className={subSection}>
                     <h1 className={mainCaption}>Contact</h1>
                     <h2 className={subCaption}>Contact information:</h2>
