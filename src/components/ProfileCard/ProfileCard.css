@@ -35,13 +35,6 @@
   touch-action: none;
 }
 
-/* Разрешаем скроллинг на мобильных устройствах */
-@media (max-width: 768px) {
-  .pc-card-wrapper {
-    touch-action: pan-y;
-  }
-}
-
 .pc-card-wrapper::before {
   content: '';
   position: absolute;
@@ -189,14 +182,10 @@
 }
 
 .pc-avatar-content .avatar {
-  width: 100%;
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%) scale(1);
-  bottom: -100px;
-  opacity: calc(1.75 - var(--pointer-from-center));
-  object-fit: cover;
-  max-height: 100%;
+  width: 100% !important;
+  position: absolute !important;
+  top: 45px !important;
+  opacity: calc(1.75 - var(--pointer-from-center)) !important;
 }
 
 .pc-avatar-content::before {
@@ -237,8 +226,8 @@
 }
 
 .pc-mini-avatar {
-  width: 50px;
-  height: 50px;
+  width: 48px;
+  height: 48px;
   border-radius: 50%;
   overflow: hidden;
   border: 1px solid rgba(255, 255, 255, 0.1);
@@ -247,7 +236,7 @@
 
 .pc-mini-avatar img {
   width: 100%;
-  height: 60%;
+  height: 100%;
   object-fit: cover;
   border-radius: 50%;
 }
@@ -357,45 +346,40 @@
 
 @media (max-width: 768px) {
   .pc-card {
-    height: 55svh;
-    max-height: 380px;
-  }
-
-  .pc-avatar-content .avatar {
-    bottom: -60px;
-    transform: translateX(-50%) scale(0.8);
+    height: 70svh;
+    max-height: 450px;
   }
 
   .pc-details {
-    top: 1.5em;
+    top: 2em;
   }
 
   .pc-details h3 {
-    font-size: min(3.5svh, 2.2em);
+    font-size: min(4svh, 2.5em);
   }
 
   .pc-details p {
-    font-size: 13px;
+    font-size: 14px;
   }
 
   .pc-user-info {
-    bottom: 12px;
-    left: 12px;
-    right: 12px;
-    padding: 8px 10px;
+    bottom: 15px;
+    left: 15px;
+    right: 15px;
+    padding: 10px 12px;
   }
 
   .pc-mini-avatar {
-    width: 32px;
-    height: 32px;
+    width: 28px;
+    height: 28px;
   }
 
   .pc-user-details {
-    gap: 8px;
+    gap: 10px;
   }
 
   .pc-handle {
-    font-size: 12px;
+    font-size: 13px;
   }
 
   .pc-status {
@@ -410,39 +394,113 @@
 
 @media (max-width: 480px) {
   .pc-card {
-    height: 50svh;
-    max-height: 320px;
-  }
-
-  .pc-avatar-content .avatar {
-    bottom: -40px;
-    transform: translateX(-50%) scale(0.7);
+    height: 60svh;
+    max-height: 380px;
   }
 
   .pc-details {
-    top: 1em;
+    top: 1.5em;
   }
 
   .pc-details h3 {
-    font-size: min(3svh, 1.8em);
+    font-size: min(3.5svh, 2em);
+  }
+
+  .pc-details p {
+    font-size: 12px;
+    top: -8px;
+  }
+
+  .pc-user-info {
+    bottom: 12px;
+    left: 12px;
+    right: 12px;
+    padding: 8px 10px;
+    border-radius: 50px;
+  }
+
+  .pc-mini-avatar {
+    width: 24px;
+    height: 24px;
+  }
+
+  .pc-user-details {
+    gap: 8px;
+  }
+
+  .pc-handle {
+    font-size: 12px;
+  }
+
+  .pc-status {
+    font-size: 9px;
+  }
+
+  .pc-contact-btn {
+    padding: 5px 10px;
+    font-size: 10px;
+    border-radius: 50px;
+  }
+}
+
+/* Safari детектор - простой и надежный метод */
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+  .pc-avatar-content {
+    mix-blend-mode: normal !important;
+  }
+  
+  .pc-shine {
+    mix-blend-mode: normal !important;
+    filter: brightness(0.4) contrast(1.8) saturate(0.2) !important;
+  }
+  
+  .pc-glare {
+    mix-blend-mode: normal !important;
+    opacity: 0.3 !important;
+  }
+  
+  .pc-card {
+    background-blend-mode: normal !important;
+  }
+  
+  .pc-shine::before {
+    mix-blend-mode: normal !important;
+    filter: brightness(0.3) contrast(2) saturate(0.1) !important;
+  }
+  
+  .pc-shine::after {
+    mix-blend-mode: normal !important;
+  }
+  
+  .pc-contact-btn {
+    background: rgba(255, 255, 255, 0.15) !important;
+    color: rgba(255, 255, 255, 0.9) !important;
+    border: 1px solid rgba(255, 255, 255, 0.3) !important;
+  }
+}
+
+@media (max-width: 320px) {
+  .pc-card {
+    height: 55svh;
+    max-height: 320px;
+  }
+
+  .pc-details h3 {
+    font-size: min(3svh, 1.5em);
   }
 
   .pc-details p {
     font-size: 11px;
-    top: -6px;
   }
 
   .pc-user-info {
-    bottom: 10px;
-    left: 10px;
-    right: 10px;
     padding: 6px 8px;
-    border-radius: 12px;
+    border-radius: 50px;
   }
 
   .pc-mini-avatar {
-    width: 28px;
-    height: 28px;
+    width: 20px;
+    height: 20px;
   }
 
   .pc-user-details {
@@ -454,93 +512,259 @@
   }
 
   .pc-status {
-    font-size: 9px;
+    font-size: 8px;
   }
 
   .pc-contact-btn {
     padding: 4px 8px;
     font-size: 9px;
-    border-radius: 8px;
+    border-radius: 50px;
   }
 }
 
-@media (max-width: 320px) {
-  .pc-card {
-    height: 45svh;
-    max-height: 280px;
+/* Дополнительный Safari детектор через _::-webkit-full-page-media */
+_::-webkit-full-page-media, _:future, :root .pc-avatar-content {
+  mix-blend-mode: normal !important;
+}
+
+_::-webkit-full-page-media, _:future, :root .pc-shine {
+  mix-blend-mode: normal !important;
+  filter: brightness(0.4) contrast(1.8) saturate(0.2) !important;
+}
+
+_::-webkit-full-page-media, _:future, :root .pc-glare {
+  mix-blend-mode: normal !important;
+  opacity: 0.3 !important;
+}
+
+_::-webkit-full-page-media, _:future, :root .pc-card {
+  background-blend-mode: normal !important;
+}
+
+_::-webkit-full-page-media, _:future, :root .pc-shine::before {
+  mix-blend-mode: normal !important;
+  filter: brightness(0.3) contrast(2) saturate(0.1) !important;
+}
+
+_::-webkit-full-page-media, _:future, :root .pc-shine::after {
+  mix-blend-mode: normal !important;
+}
+
+_::-webkit-full-page-media, _:future, :root .pc-contact-btn {
+  background: rgba(255, 255, 255, 0.15) !important;
+  color: rgba(255, 255, 255, 0.9) !important;
+  border: 1px solid rgba(255, 255, 255, 0.3) !important;
+}
+
+  /* Safari универсальный детектор */
+  @supports selector(::-webkit-scrollbar) {
+    .pc-avatar-content .avatar {
+      position: absolute !important;
+      left: 50% !important;
+      top: 50% !important;
+      bottom: auto !important;
+      transform: translate(-50%, -50%) !important;
+      width: 100% !important;
+      height: auto !important;
+      object-fit: cover !important;
+    }
+    
+    /* Отключаем проблемные mix-blend-mode для Safari */
+    .pc-avatar-content {
+      mix-blend-mode: normal !important;
+    }
+    
+    .pc-shine {
+      mix-blend-mode: normal !important;
+      filter: brightness(0.4) contrast(1.8) saturate(0.2) !important;
+    }
+    
+    .pc-glare {
+      mix-blend-mode: normal !important;
+      opacity: 0.3 !important;
+    }
+    
+    .pc-card {
+      background-blend-mode: normal !important;
+    }
+    
+    .pc-shine::before {
+      mix-blend-mode: normal !important;
+      filter: brightness(0.3) contrast(2) saturate(0.1) !important;
+    }
+    
+    .pc-shine::after {
+      mix-blend-mode: normal !important;
+    }
   }
 
-  .pc-avatar-content .avatar {
-    bottom: -30px;
-    transform: translateX(-50%) scale(0.6);
+  /* Safari desktop браузер - метод 2 */
+  @supports (-webkit-hyphens: none) and (not (-moz-appearance: none)) {
+    .pc-avatar-content .avatar {
+      position: absolute !important;
+      left: 50% !important;
+      top: 50% !important;
+      bottom: auto !important;
+      transform: translate(-50%, -50%) !important;
+      width: 100% !important;
+      height: auto !important;
+      object-fit: cover !important;
+    }
+    
+    /* Отключаем проблемные mix-blend-mode для Safari */
+    .pc-avatar-content {
+      mix-blend-mode: normal !important;
+    }
+    
+    .pc-shine {
+      mix-blend-mode: normal !important;
+      filter: brightness(0.4) contrast(1.8) saturate(0.2) !important;
+    }
+    
+    .pc-glare {
+      mix-blend-mode: normal !important;
+      opacity: 0.3 !important;
+    }
+    
+    .pc-card {
+      background-blend-mode: normal !important;
+    }
+    
+    .pc-shine::before {
+      mix-blend-mode: normal !important;
+      filter: brightness(0.3) contrast(2) saturate(0.1) !important;
+    }
+    
+    .pc-shine::after {
+      mix-blend-mode: normal !important;
+    }
+
+    .pc-contact-btn {
+      opacity: 0.1 !important;
+    }
   }
 
-  .pc-details {
-    top: 0.8em;
-  }
+/* Safari desktop браузер - метод 3 */
+@media not all and (min-resolution:.001dpcm) {
+      @supports (-webkit-appearance:none) {
+      .pc-avatar-content .avatar {
+        left: 50% !important;
+        top: 50% !important;
+        transform: translate(-50%, -50%) !important;
+      }
+      
+      /* Отключаем проблемные mix-blend-mode для Safari */
+      .pc-avatar-content {
+        mix-blend-mode: normal !important;
+      }
+      
+      .pc-shine {
+        mix-blend-mode: normal !important;
+        filter: brightness(0.4) contrast(1.8) saturate(0.2) !important;
+      }
+      
+      .pc-glare {
+        mix-blend-mode: normal !important;
+        opacity: 0.3 !important;
+      }
+      
+      .pc-card {
+        background-blend-mode: normal !important;
+      }
+      
+      .pc-shine::before {
+        mix-blend-mode: normal !important;
+        filter: brightness(0.3) contrast(2) saturate(0.1) !important;
+      }
+      
+      .pc-shine::after {
+        mix-blend-mode: normal !important;
+      }
 
-  .pc-details h3 {
-    font-size: min(2.5svh, 1.4em);
-  }
+      .pc-contact-btn {
+        opacity: 0.1 !important;
+      }
+    }
+}
 
-  .pc-details p {
-    font-size: 10px;
-    top: -4px;
-  }
-
-  .pc-user-info {
-    bottom: 8px;
-    left: 8px;
-    right: 8px;
-    padding: 5px 6px;
-    border-radius: 10px;
-  }
-
-  .pc-mini-avatar {
-    width: 24px;
-    height: 24px;
-  }
-
-  .pc-user-details {
-    gap: 5px;
-  }
-
-  .pc-handle {
-    font-size: 10px;
-  }
-
-  .pc-status {
-    font-size: 8px;
-  }
-
+/* Safari iOS mobile - метод 1 */  
+  @supports (-webkit-touch-callout: none) {
+    .pc-avatar-content .avatar {
+      left: 50% !important;
+      top: 50% !important;
+      transform: translate(-50%, -50%) !important;
+    }
+    
+    /* Отключаем проблемные mix-blend-mode для Safari */
+    .pc-avatar-content {
+      mix-blend-mode: normal !important;
+    }
+    
+    .pc-shine {
+      mix-blend-mode: normal !important;
+      filter: brightness(0.4) contrast(1.8) saturate(0.2) !important;
+    }
+    
+    .pc-glare {
+      mix-blend-mode: normal !important;
+      opacity: 0.3 !important;
+    }
+    
+    .pc-card {
+      background-blend-mode: normal !important;
+    }
+    
+    .pc-shine::before {
+      mix-blend-mode: normal !important;
+      filter: brightness(0.3) contrast(2) saturate(0.1) !important;
+    }
+    
+    .pc-shine::after {
+      mix-blend-mode: normal !important;
+    }
+  
   .pc-contact-btn {
-    padding: 3px 6px;
-    font-size: 8px;
-    border-radius: 6px;
+    opacity: 0.1 !important;
   }
 }
 
-/* Специальные стили для iOS устройств */
-@supports (-webkit-touch-callout: none) {
-  @media (max-width: 768px) {
+/* Safari iOS mobile - метод 2 */
+  @supports (-webkit-overflow-scrolling: touch) {
     .pc-avatar-content .avatar {
-      bottom: -50px;
-      height: auto;
-      max-height: 80%;
+      left: 50% !important;
+      top: 50% !important;
+      transform: translate(-50%, -50%) !important;
     }
-  }
+    
+    /* Отключаем проблемные mix-blend-mode для Safari */
+    .pc-avatar-content {
+      mix-blend-mode: normal !important;
+    }
+    
+    .pc-shine {
+      mix-blend-mode: normal !important;
+      filter: brightness(0.4) contrast(1.8) saturate(0.2) !important;
+    }
+    
+    .pc-glare {
+      mix-blend-mode: normal !important;
+      opacity: 0.3 !important;
+    }
+    
+    .pc-card {
+      background-blend-mode: normal !important;
+    }
+    
+    .pc-shine::before {
+      mix-blend-mode: normal !important;
+      filter: brightness(0.3) contrast(2) saturate(0.1) !important;
+    }
+    
+    .pc-shine::after {
+      mix-blend-mode: normal !important;
+    }
 
-  @media (max-width: 480px) {
-    .pc-avatar-content .avatar {
-      bottom: -35px;
-      max-height: 75%;
+    .pc-contact-btn {
+      opacity: 0.1 !important;
     }
   }
-
-  @media (max-width: 320px) {
-    .pc-avatar-content .avatar {
-      bottom: -25px;
-      max-height: 70%;
-    }
-  }
-}

@@ -1,5 +1,26 @@
 import React, { useEffect, useRef, useCallback, useMemo, useState } from "react";
+import { Button } from "../ui/button";
+import Image from "next/image";
 import "./ProfileCard.css";
+
+// Функция для проверки валидности URL или пути
+const isValidImageSrc = (src: string): boolean => {
+  if (!src || src.includes("Placeholder")) return false;
+  try {
+    // Проверяем абсолютные URL
+    new URL(src);
+    return true;
+  } catch {
+    // Проверяем относительные пути и файлы из public
+    return src.startsWith('/') || 
+           src.endsWith('.png') || 
+           src.endsWith('.jpg') || 
+           src.endsWith('.jpeg') || 
+           src.endsWith('.gif') || 
+           src.endsWith('.webp') ||
+           src.endsWith('.svg');
+  }
+};
 
 interface ProfileCardProps {
   avatarUrl: string;
@@ -296,45 +317,62 @@ const ProfileCardComponent: React.FC<ProfileCardProps> = ({
           <div className="pc-shine" />
           <div className="pc-glare" />
           <div className="pc-content pc-avatar-content">
-            <img
-              className="avatar"
-              src={avatarUrl}
-              alt={`${name || "User"} avatar`}
-              loading="lazy"
-              onError={(e) => {
-                const target = e.target as HTMLImageElement;
-                target.style.display = "none";
-              }}
-            />
+            {isValidImageSrc(avatarUrl) ? (
+              <Image
+                className="avatar"
+                src={avatarUrl.startsWith('/') ? avatarUrl : `/${avatarUrl}`}
+                alt={`${name || "User"} avatar`}
+                fill
+                sizes="(max-width: 768px) 100vw, 400px"
+                style={{ 
+                  objectFit: 'cover',
+                  left: '50%',
+                  top: '50%',
+                  transform: 'translate(-50%, -50%)',
+                  zIndex: 1
+                }}
+                onError={(e: React.SyntheticEvent<HTMLImageElement>) => {
+                  const target = e.target as HTMLImageElement;
+                  target.style.display = "none";
+                }}
+              />
+            ) : (
+              <div className="avatar" style={{ background: 'rgba(255,255,255,0.1)' }} />
+            )}
             {showUserInfo && (
               <div className="pc-user-info">
-                <div className="pc-user-details">
-                  <div className="pc-mini-avatar">
-                    <img
-                      src={miniAvatarUrl || avatarUrl}
-                      alt={`${name || "User"} mini avatar`}
-                      loading="lazy"
-                      onError={(e) => {
-                        const target = e.target as HTMLImageElement;
-                        target.style.opacity = "0.5";
-                        target.src = avatarUrl;
-                      }}
-                    />
-                  </div>
+                  <div className="pc-user-details">
+                    <div className="pc-mini-avatar">
+                      {isValidImageSrc(miniAvatarUrl || avatarUrl) ? (
+                        <Image
+                          src={(miniAvatarUrl || avatarUrl).startsWith('/') ? (miniAvatarUrl || avatarUrl) : `/${miniAvatarUrl || avatarUrl}`}
+                          alt={`${name || "User"} mini avatar`}
+                          fill
+                          sizes="50px"
+                          style={{ objectFit: 'cover' }}
+                          onError={(e: React.SyntheticEvent<HTMLImageElement>) => {
+                            const target = e.target as HTMLImageElement;
+                            target.style.opacity = "0.5";
+                          }}
+                        />
+                      ) : (
+                        <div style={{ width: '100%', height: '100%', background: 'rgba(255,255,255,0.1)', borderRadius: '50%' }} />
+                      )}
+                    </div>
                   <div className="pc-user-text">
                     <div className="pc-handle">@{handle}</div>
                     <div className="pc-status">{status}</div>
                   </div>
                 </div>
-                <button
-                  className="pc-contact-btn"
+                <Button
+                  className="px-4 text-sm rounded-full h-10 text-white"
                   onClick={handleContactClick}
                   style={{ pointerEvents: "auto" }}
                   type="button"
                   aria-label={`Contact ${name || "user"}`}
                 >
                   {contactText}
-                </button>
+                </Button>
               </div>
             )}
           </div>

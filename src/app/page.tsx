@@ -48,7 +48,7 @@ export default function Home() {
                     </div>
                     <div className="relative flex justify-between md:gap-10 gap-4 items-center flex-wrap">
                         <PAvatar />
-                        <div className="flex-1 text-center md:text-left">
+                        <div className="flex-1 text-center md:text-left min-w-[300px]">
                             <div
                                 ref={containerRef}
                                 style={{position: 'relative'}}
