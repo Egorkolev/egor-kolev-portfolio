@@ -5,8 +5,7 @@ import randonizer from '../../public/randonizer.avif';
 import AOS from "aos";
 import 'aos/dist/aos.css';
 import Image, { StaticImageData } from 'next/image';
-import { PTooltip } from './PTooltip';
-import { Button } from '@/components/ui/button';
+import SpotlightCard from '@/components/SpotlightCard/SpotlightCard';
 
 interface TechnologyType {
     name: string;
@@ -29,89 +28,60 @@ const randonizerTech: TechnologyType[] = [
     { name: "Ant Design" },
 ];
 
-const boxStyle = `
-    p-3 border border-pinkShade 
-    bg-pinkShade bg-opacity-5 
-    flex-1 gap-6 min-w-[290px]
-    flex flex-col
-`
-const titleStyle = `
-    text-xl text-center lg:text-start
-`
-const paragraphTech = `
-    text-sm md:text-base px-2 
-    border border-green flex-1
-    whitespace-nowrap bg-pink
-    bg-opacity-20 dark:bg-opacity-5
-`
-const paragraphStyle = `
-    text-pretty
-`
-const boxItem = `
-    flex w-fit gap-2 flex-wrap flex-1
-`
-const cart = `
-    flex flex-wrap
-    justify-between gap-4 
-    items-start text-balance 
-    text-justify
-`
-const cartItem = `
-    max-w-xl flex 
-    flex-col gap-2 
-    m-auto lg:m-0
-`
-const imgStyle = `
-    max-w-[400px] min-w-[264px] w-[100%]
-    flex-1 hover:shadow-md m-auto lg:m-0
-    hover:shadow-blueText cursor-pointer
-`
-
-const ProjectSection = ({ title, paragraph, tooltip, hrefLink, technologies, projImg }: {
+const ExperienceSection = ({ title, paragraph, hrefLink, technologies, projImg }: {
     title: string, 
     paragraph: string, 
-    tooltip?: string,
     hrefLink?: string,
     technologies: TechnologyType[], 
-    projImg: StaticImageData }) => {
+    projImg: StaticImageData 
+}) => {
     return (
-        <div data-aos="fade-up" className={boxStyle}>
-            <h2 className={titleStyle}>{title}</h2>
-            <div className={cart}>
-                <PTooltip label={tooltip}>
-                    <Button 
-                        disabled={!hrefLink?.length}
-                        className='w-fiy h-full m-auto lg:m-0 flex-1 p-0'>
-                        <a  
-                            rel="preload"
-                            style={{borderRadius: "5px"}}
+        <div data-aos="fade-up">
+            <SpotlightCard 
+                className="backdrop-blur-sm border border-slate-700/30 rounded-xl p-6 hover:bg-slate-900/60 transition-all duration-300"
+                spotlightColor="rgba(99, 102, 241, 0.15)"
+            >
+                <div className="flex flex-col lg:flex-row gap-6 items-start">
+                    {/* Image Section */}
+                    <div className="flex-shrink-0 w-full lg:w-80">
+                        <a 
                             href={hrefLink} 
-                            target={"_blank"}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="block"
                         > 
                             <Image
-                                style={{borderRadius: "5px"}}
-                                data-aos="fade-up"
-                                className={imgStyle}
+                                className="w-full h-48 lg:h-56 object-cover rounded-lg hover:scale-105 transition-transform duration-300 cursor-pointer border border-slate-600/30"
                                 src={projImg}
-                                alt="Picture project" 
+                                alt="Company image" 
                                 priority
                             />
                         </a>
-                    </Button>
-                </PTooltip>
-                <div className={cartItem}>     
-                    <p className={paragraphStyle}>
-                        {paragraph}
-                    </p>
-                    <div className={boxItem}>
-                        {technologies.map((item) => {
-                            return (
-                                <p className={paragraphTech} key={item.name}>{item.name}</p>
-                            )
-                        })}
+                    </div>
+
+                    {/* Content Section */}
+                    <div className="flex-1 space-y-4">
+                        <h3 className="text-lg font-semibold text-white">
+                            {title}
+                        </h3>
+                        
+                        <p className="text-slate-300 text-sm leading-relaxed">
+                            {paragraph}
+                        </p>
+                        
+                        <div className="flex flex-wrap gap-2">
+                            {technologies.map((tech) => (
+                                <span
+                                    key={tech.name}
+                                    className="px-3 py-1.5 bg-slate-800/60 text-slate-200 text-sm font-medium rounded-lg hover:bg-slate-700/70 hover:text-white transition-all duration-200 border border-slate-600/20"
+                                >
+                                    {tech.name}
+                                </span>
+                            ))}
+                        </div>
                     </div>
                 </div>
-            </div>
+            </SpotlightCard>
         </div>
     )
 }
@@ -128,35 +98,20 @@ export default function PExperience() {
       }, []);
 
   return (
-    <div className='relative'>
-        <span className='absolute top-0 left-40 shadow-[400px_130px_360px_180px_rgba(150,1,130,0.1)] z-[-1] rounded-full'></span>
-        <span className='absolute top-0 left-40 shadow-[200px_180px_360px_100px_rgba(100,1,130,0.3)] z-[-1] rounded-full'></span>
-        <span className='absolute top-0 left-40 shadow-[100px_130px_360px_120px_rgba(120,1,130,0.1)] z-[-1] rounded-full'></span>
-        <span className='absolute bottom-20 right-20 w-80 h-80 -z-10 opacity-10'
-            style={{
-                background: 'url(/typescript.svg)',
-                backgroundSize: 'cover',
-                backgroundPosition: 'center'
-         }}></span>
-         <ProjectSection 
+    <div className='max-w-5xl mx-auto space-y-6'>
+         <ExperienceSection 
             technologies={iseehearTech} 
             projImg={iseehear}
             hrefLink='https://www.linkedin.com/company/iseehear-inc./'
             title='Frontend Developer - Iseehear Inc. (Toronto, ON, Canada): Jun 2022 - Oct 2024'
-            tooltip='Visit LinkedIn'
-            paragraph='Record Builder - Designed and developed a custom solution for creating and managing user-defined data records.
-            Implemented dynamic forms, ensuring scalability and reusability.
-            Delivered a modular and maintainable codebase, improving development efficiency for future updates.'
+            paragraph='Record Builder - Designed and developed a custom solution for creating and managing user-defined data records. Implemented dynamic forms, ensuring scalability and reusability. Delivered a modular and maintainable codebase, improving development efficiency for future updates.'
         />
-         <ProjectSection 
+         <ExperienceSection 
             technologies={randonizerTech} 
             projImg={randonizer}
             hrefLink='https://www.linkedin.com/company/randonizer/'
             title='Frontend Developer - Randonizer (Kharkiv, Ukraine): Apr 2020 - Mar 2022'
-            tooltip='Visit LinkedIn'
-            paragraph='Influencers ad platform - Created a mapping app that lets users interact with real-world containers and see real-time data for a more engaging experience. 
-            Built a platform for influencers to easily organize events and connect with their audience.
-            Developed an ad platform where advertisers can track and manage the performance of influencer campaigns.'
+            paragraph='Influencers ad platform - Created a mapping app that lets users interact with real-world containers and see real-time data for a more engaging experience. Built a platform for influencers to easily organize events and connect with their audience. Developed an ad platform where advertisers can track and manage the performance of influencer campaigns.'
         />
     </div>
   )

@@ -1,46 +1,113 @@
 "use client";
 
-import React, { useEffect } from 'react';
+import React from 'react';
+import { motion } from 'framer-motion';
 import { FaGithub } from "react-icons/fa";
 import { SiLinkedin } from "react-icons/si";
 import { SiGmail } from "react-icons/si";
-import AOS from "aos";
-import 'aos/dist/aos.css';
 
-const linkStyle = `
-    text-lg dark:text-blueText text-blue-500 flex gap-2
-`
-const iconStyle = `
-    w-8 h-8 text-pinkShade
-`
+interface ContactLinkData {
+    href?: string;
+    icon: React.ComponentType<{ className?: string }>;
+    label: string;
+    isEmail?: boolean;
+}
+
+const CONTACT_LINKS: ContactLinkData[] = [
+    {
+        href: "https://www.linkedin.com/in/iegor-koliev-834759233/",
+        icon: SiLinkedin,
+        label: "LinkedIn"
+    },
+    {
+        href: "https://github.com/Egorkolev",
+        icon: FaGithub,
+        label: "GitHub"
+    },
+    {
+        icon: SiGmail,
+        label: "kolevegor@gmail.com",
+        isEmail: true
+    }
+];
+
+const ANIMATION_VARIANTS = {
+    container: {
+        hidden: { opacity: 0 },
+        visible: {
+            opacity: 1,
+            transition: {
+                staggerChildren: 0.1,
+                delayChildren: 0.2
+            }
+        }
+    },
+    item: {
+        hidden: { opacity: 0, x: 20 },
+        visible: {
+            opacity: 1,
+            x: 0,
+            transition: { duration: 0.5 }
+        }
+    }
+};
 
 export default function PContactLinks() {
+    const renderContactLink = (link: ContactLinkData, index: number) => {
+        const IconComponent = link.icon;
+        
+        const content = (
+            <div className="contact-info">
+                <IconComponent className="social-icon" />
+                <span className="text-sm font-medium">{link.label}</span>
+            </div>
+        );
 
-    useEffect(() => {
-    AOS.init({
-        duration: 800,
-        once: true,
-        offset: 120,
-        easing: 'ease-in-out',
-    })
-    }, []);
+        return (
+            <motion.li key={index} variants={ANIMATION_VARIANTS.item}>
+                {link.isEmail ? (
+                    content
+                ) : (
+                    <a 
+                        href={link.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="block"
+                    >
+                        {content}
+                    </a>
+                )}
+            </motion.li>
+        );
+    };
 
     return (
-        <div className='relative'>
-            <span className='absolute top-0 left-40 shadow-[400px_130px_360px_180px_rgba(150,1,130,0.1)] z-[-1] rounded-full'></span>
-            <span className='absolute top-0 left-40 shadow-[200px_180px_360px_100px_rgba(100,1,130,0.3)] z-[-1] rounded-full'></span>
-            <span className='absolute top-0 left-40 shadow-[100px_130px_360px_120px_rgba(120,1,130,0.1)] z-[-1] rounded-full'></span>
-            <span className='absolute bottom-20 right-20 w-80 h-80 -z-10 opacity-10'
-                style={{
-                    background: 'url(/git.svg)',
-                    backgroundSize: 'cover',
-                    backgroundPosition: 'center'
-            }}></span>
-            <ul data-aos="fade-left" className='flex flex-col gap-4'>
-                <li><a rel="preload" className={linkStyle} href="https://www.linkedin.com/in/iegor-koliev-834759233/" target='_blank'><SiLinkedin className={iconStyle} />LinkedIn</a></li>
-                <li><a rel="preload" className={linkStyle} href="https://github.com/Egorkolev" target='_blank'><FaGithub className={iconStyle} />GitHub</a></li>
-                <li className={linkStyle}><SiGmail className={iconStyle} />kolevegor@gmail.com</li>
-            </ul>
+        <div className="space-y-6">
+            {/* Status Badge */}
+            <div className="text-center">
+                <div className="status-badge">
+                    <div className="status-dot"></div>
+                    Available for work
+                </div>
+            </div>
+
+            {/* Contact Links */}
+            <motion.ul 
+                className="space-y-4"
+                variants={ANIMATION_VARIANTS.container}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, amount: 0.3 }}
+            >
+                {CONTACT_LINKS.map(renderContactLink)}
+            </motion.ul>
+
+            {/* Additional Info */}
+            <div className="text-center">
+                <p className="text-muted-sm">
+                    Feel free to reach out for collaborations or just a friendly hello!
+                </p>
+            </div>
         </div>
-    )
+    );
 }

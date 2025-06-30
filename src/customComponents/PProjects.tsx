@@ -15,10 +15,9 @@ import taskManager3 from '../../public/task/task3.png';
 import taskManager4 from '../../public/task/task4.png';
 import taskManager5 from '../../public/task/task5.png';
 import taskManager from '../../public/task/task2.png';
-import Image, { StaticImageData } from 'next/image';
+import { StaticImageData } from 'next/image';
 import React, { useEffect, useState } from 'react';
-import { Button } from '@/components/ui/button';
-import { PTooltip } from './PTooltip';
+import { ChromaGrid, ChromaItem } from '@/components/ChromaGrid/ChromaGrid';
 import PDialog from './PDialog';
 import 'aos/dist/aos.css';
 import AOS from "aos";
@@ -84,145 +83,160 @@ const labAssistImages = [
     labAssist5,
     labAssist6,
 ];
-const boxStyle = `
-    p-3 border border-pinkShade 
-    bg-pinkShade bg-opacity-5 
-    flex-1 gap-2 min-w-[290px]
-    flex flex-col
-`
-const titleStyle = `
-    text-xl whitespace-nowrap
-`
-const paragraphTech = `
-    text-sm md:text-base px-2 
-    border border-green flex-1
-    whitespace-nowrap bg-pink
-    bg-opacity-20 dark:bg-opacity-5
-`
-const paragraphStyle = `
-    text-pretty
-`
-const boxItem = `
-    flex w-fit gap-2 flex-wrap flex-1
-`
-const cart = `
-    flex flex-wrap-reverse 
-    justify-between gap-4 
-    items-end text-balance 
-    text-justify
-`
-const cartItem = `
-    max-w-xl flex 
-    flex-col gap-2 
-    m-auto lg:m-0
-`
-const imgStyle = `
-    max-w-[400px] min-w-[264px] w-[100%]
-    flex-1 hover:shadow-md m-auto lg:m-0
-    hover:shadow-blueText cursor-pointer
-`
+// Преобразуем StaticImageData в строку URL для ChromaGrid
+const getImageUrl = (image: StaticImageData): string => {
+    return image.src;
+};
 
-const ProjectSection = ({ title, paragraph, tooltip, hrefLink, technologies, projImg, imgGalery }: {
-    title: string, 
-    paragraph: string, 
-    tooltip?: string,
-    hrefLink?: string,
-    technologies: TechnologyType[], 
-    imgGalery: StaticImageData[],
-    projImg: StaticImageData }) => {
+const ProjectData: ChromaItem[] = [
+    {
+        image: getImageUrl(labAssist1),
+        title: "Lab Assist",
+        subtitle: "Fullstack Laboratory Management",
+        handle: "Lab Management System",
+        borderColor: "#4F46E5",
+        gradient: "linear-gradient(145deg, #4F46E5, #1e293b)",
+        url: "https://lab-rador-assist.vercel.app/"
+    },
+    {
+        image: getImageUrl(cryptoLottery),
+        title: "Crypto Lottery",
+        subtitle: "Blockchain Lottery Platform",
+        handle: "Blockchain Technology",
+        borderColor: "#10B981",
+        gradient: "linear-gradient(210deg, #10B981, #1e293b)",
+        url: ""
+    },
+    {
+        image: getImageUrl(taskManager),
+        title: "Task Manager",
+        subtitle: "Modern Task Management",
+        handle: "Productivity Tool",
+        borderColor: "#F59E0B",
+        gradient: "linear-gradient(165deg, #F59E0B, #1e293b)",
+        url: "https://semicolon-task-management.vercel.app/"
+    }
+];
+
+const ProjectDetails = ({ 
+    title, 
+    paragraph, 
+    technologies, 
+    imgGallery, 
+    hrefLink 
+}: {
+    title: string;
+    paragraph: string;
+    technologies: TechnologyType[];
+    imgGallery: StaticImageData[];
+    hrefLink?: string;
+}) => {
     const [showDialog, setShowDialog] = useState<boolean>(false);
 
     return (
-        <div data-aos="fade-up" className={boxStyle}>
-            <h2 className={titleStyle}>{title}</h2>
-            <div className={cart}>
-                <div className={cartItem}>     
-                    <p className={paragraphStyle}>
+        <>
+            <div data-aos="fade-up" className="bg-slate-900/40 backdrop-blur-sm border border-slate-700/30 rounded-xl p-6 hover:bg-slate-900/60 transition-all duration-300 mb-6">
+                <div className="space-y-4">
+                    <h3 className="text-lg font-semibold text-white">
+                        {title}
+                    </h3>
+                    
+                    <p className="text-slate-300 text-sm leading-relaxed">
                         {paragraph}
                     </p>
-                    <div className={boxItem}>
-                        {technologies.map((item) => {
-                            return (
-                                <p className={paragraphTech} key={item.name}>{item.name}</p>
-                            )
-                        })}
+                    
+                    <div className="flex flex-wrap gap-2">
+                        {technologies.map((tech) => (
+                            <span
+                                key={tech.name}
+                                className="px-3 py-1.5 bg-slate-800/60 text-slate-200 text-sm font-medium rounded-lg hover:bg-slate-700/70 hover:text-white transition-all duration-200 border border-slate-600/20"
+                            >
+                                {tech.name}
+                            </span>
+                        ))}
+                    </div>
+
+                    <div className="flex gap-3 pt-2">
+                        <button
+                            onClick={() => setShowDialog(true)}
+                            className="theme-toggle bg-purple-500/20 text-white"
+                        >
+                            View Gallery
+                        </button>
+                        {hrefLink && (
+                            <a
+                                href={hrefLink}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="theme-toggle bg-blue-500/20 text-white"
+                            >
+                                Visit Project
+                            </a>
+                        )}
                     </div>
                 </div>
-                <PTooltip label={tooltip}>
-                    <Button 
-                        className='w-fit h-full m-auto lg:m-0 flex-1 p-0'
-                        onClick={() => setShowDialog(true)}
-                    >
-                        <Image
-                            style={{borderRadius: "5px"}}
-                            data-aos="fade-up"
-                            className={imgStyle}
-                            src={projImg}
-                            alt="Picture project" 
-                            priority
-                        />
-                    </Button>
-                </PTooltip>
-                <PDialog imgGalery={imgGalery} hrefLink={hrefLink} dialogSwitcher={showDialog} onChangeDialog={setShowDialog} />
+            </div>
+            <PDialog 
+                imgGalery={imgGallery} 
+                hrefLink={hrefLink} 
+                dialogSwitcher={showDialog} 
+                onChangeDialog={setShowDialog} 
+            />
+        </>
+    );
+};
+
+export default function PProjects() {
+    useEffect(() => {
+        AOS.init({
+            duration: 800,
+            once: true,
+            offset: 120,
+            easing: 'ease-in-out',
+        })
+    }, []);
+
+    return (
+        <div className='max-w-5xl mx-auto space-y-8'>
+            {/* ChromaGrid для визуального отображения проектов */}
+            <div data-aos="fade-up" className="flex justify-center backdrop-blur-sm">
+                <ChromaGrid 
+                    items={ProjectData}
+                    className="w-full max-w-4xl"
+                    radius={250}
+                    columns={3}
+                    rows={1}
+                    damping={0.4}
+                    fadeOut={0.5}
+                />
+            </div>
+
+            {/* Детальная информация о проектах */}
+            <div className="space-y-6">
+                <ProjectDetails 
+                    title="Lab Assist"
+                    paragraph="Lab Assist - is an early-stage project, comprehensive fullstack solution for laboratory process management and scientific research automation. The application includes experiment management systems, data analysis, and workflow digitization. As a Fullstack Developer, I am responsible for the complete development cycle - from server-side logic and database architecture to user interface implementation."
+                    technologies={labAssistTech}
+                    imgGallery={labAssistImages}
+                    hrefLink="https://lab-rador-assist.vercel.app/"
+                />
+                
+                <ProjectDetails 
+                    title="Crypto Lottery"
+                    paragraph="Crypto Lotteria - is an early-stage startup leveraging blockchain technology for innovative lottery solutions, with a backend built in Rust and Web3.js. As a Frontend Developer, I am responsible for building and optimizing the user-facing interface using modern tools."
+                    technologies={cryptoLotteryTech}
+                    imgGallery={cryptoImages}
+                    hrefLink=""
+                />
+                
+                <ProjectDetails 
+                    title="Task Manager"
+                    paragraph="Task Manager - is a web application for task management, built using Next.js, React, TypeScript, and Prisma. It allows users to create, edit, and organize tasks, filter them by dates, and manage users and access rights. The project is developed with modern technologies and deployed on Vercel."
+                    technologies={taskManagerTech}
+                    imgGallery={taskImages}
+                    hrefLink="https://semicolon-task-management.vercel.app/"
+                />
             </div>
         </div>
     )
-}
-
-export default function PProjects() {
-
-      useEffect(() => {
-        AOS.init({
-          duration: 800,
-          once: true,
-          offset: 120,
-          easing: 'ease-in-out',
-        })
-      }, []);
-
-  return (
-    <div className='relative'>
-        <span className='absolute top-0 -left-40 shadow-[400px_130px_360px_180px_rgba(150,1,130,0.1)] z-[-1] rounded-full'></span>
-        <span className='absolute top-0 -left-40 shadow-[200px_180px_360px_100px_rgba(100,1,130,0.3)] z-[-1] rounded-full'></span>
-        <span className='absolute top-0 -left-40 shadow-[100px_130px_360px_120px_rgba(120,1,130,0.1)] z-[-1] rounded-full'></span>
-        <span className='absolute bottom-20 -left-20 w-80 h-80 -z-10 opacity-25'
-            style={{
-                background: 'url(/nextdotjs.svg)',
-                backgroundSize: 'cover',
-                backgroundPosition: 'center'
-         }}></span>
-        <ProjectSection 
-            technologies={labAssistTech} 
-            projImg={labAssist1}
-            imgGalery={labAssistImages}
-            hrefLink='https://lab-rador-assist.vercel.app/'
-            title='Lab Assist:'
-            tooltip='Visit website'
-            paragraph='Lab Assist - is an early-stage project, comprehensive fullstack solution for laboratory process management and scientific research automation. 
-            The application includes experiment management systems, data analysis, and workflow digitization. As a Fullstack Developer, I am responsible for 
-            the complete development cycle - from server-side logic and database architecture to user interface implementation.'
-        />
-        <ProjectSection 
-            technologies={cryptoLotteryTech} 
-            projImg={cryptoLottery}
-            imgGalery={cryptoImages}
-            hrefLink=''
-            title='Crypto Lottery:'
-            tooltip='The website is not live yet'
-            paragraph='Crypto Lotteria - is an early-stage startup leveraging blockchain technology for innovative lottery solutions, 
-            with a backend built in Rust and Web3.js. As a Frontend Developer, I am responsible for building and optimizing the user-facing interface using modern tools.'
-        />
-         <ProjectSection 
-            technologies={taskManagerTech} 
-            projImg={taskManager}
-            imgGalery={taskImages}
-            hrefLink='https://semicolon-task-management.vercel.app/'
-            title='Task Manager:'
-            tooltip='Visit website'
-            paragraph='Task Manager - is a web application for task management, built using Next.js, React, TypeScript, and Prisma. 
-            It allows users to create, edit, and organize tasks, filter them by dates, and manage users and access rights. 
-            The project is developed with modern technologies and deployed on Vercel.'
-        />
-    </div>
-  )
 }
