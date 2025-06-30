@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useCallback, useMemo } from "react";
+import React, { useEffect, useRef, useCallback, useMemo, useState } from "react";
 import "./ProfileCard.css";
 
 interface ProfileCardProps {
@@ -32,6 +32,15 @@ const ANIMATION_CONFIG = {
   INITIAL_X_OFFSET: 70,
   INITIAL_Y_OFFSET: 60,
 } as const;
+
+// Функция для определения мобильных устройств
+const isMobileDevice = (): boolean => {
+  if (typeof window === 'undefined') return false;
+  
+  return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ||
+         ('ontouchstart' in window) ||
+         (window.innerWidth <= 768);
+};
 
 const clamp = (value: number, min = 0, max = 100): number =>
   Math.min(Math.max(value, min), max);
@@ -71,9 +80,25 @@ const ProfileCardComponent: React.FC<ProfileCardProps> = ({
 }) => {
   const wrapRef = useRef<HTMLDivElement>(null);
   const cardRef = useRef<HTMLDivElement>(null);
+  const [isMobile, setIsMobile] = useState(false);
+
+  // Проверка на мобильное устройство
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(isMobileDevice());
+    };
+
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+
+    return () => {
+      window.removeEventListener('resize', checkMobile);
+    };
+  }, []);
 
   const animationHandlers = useMemo(() => {
-    if (!enableTilt) return null;
+    // Отключаем анимацию на мобильных устройствах
+    if (!enableTilt || isMobile) return null;
 
     let rafId: number | null = null;
 
@@ -148,7 +173,7 @@ const ProfileCardComponent: React.FC<ProfileCardProps> = ({
         }
       },
     };
-  }, [enableTilt]);
+  }, [enableTilt, isMobile]);
 
   const handlePointerMove = useCallback(
     (event: PointerEvent) => {
@@ -200,7 +225,8 @@ const ProfileCardComponent: React.FC<ProfileCardProps> = ({
   );
 
   useEffect(() => {
-    if (!enableTilt || !animationHandlers) return;
+    // Не добавляем обработчики на мобильных устройствах
+    if (!enableTilt || !animationHandlers || isMobile) return;
 
     const card = cardRef.current;
     const wrap = wrapRef.current;
@@ -239,6 +265,7 @@ const ProfileCardComponent: React.FC<ProfileCardProps> = ({
     handlePointerMove,
     handlePointerEnter,
     handlePointerLeave,
+    isMobile,
   ]);
 
   const cardStyle = useMemo(
